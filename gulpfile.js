@@ -4,6 +4,8 @@ var inject = require('gulp-inject');
 var rename = require('gulp-rename');
 var supervisor = require('gulp-supervisor');
 var browserSync = require('browser-sync');
+var karma = require('gulp-karma');
+var mocha = require('gulp-mocha');
 
 var config = require('./server/config');
 
@@ -54,3 +56,24 @@ gulp.task('run', ['index', 'watch'], function () {
     //browser: ["google-chrome"]
   });
 });
+
+gulp.task('test-client', ['js'], function () {
+  return gulp.src([
+    'build/game.js',
+    'node_modules/angular-mocks/angular-mocks.js',
+    'test/client/**/*.js'
+  ]).pipe(karma({
+    configFile: 'karma.conf.js',
+    action: 'watch'
+  }));
+});
+
+gulp.task('test-server', function () {
+  return gulp.src([
+    'test/server/**/*.js'
+  ]).pipe(mocha({
+    reporter: 'nyan'
+  }));
+});
+
+gulp.task('default', ['run']);
