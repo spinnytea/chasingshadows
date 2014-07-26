@@ -1,6 +1,9 @@
 /* this is the base definition of an object for our game */
-module.exports = [function() {
-    var Base = function() {
+module.exports = [ 'angular', function(angular) {
+    /**
+     * @param options: you can supply render offsets (options.offsets) and initial bounds (options.bounds)
+     */
+    var Base = function(options) {
 
         // the bounds will be managed by the server
         // we will need to send and receive changes to the player's location
@@ -32,6 +35,17 @@ module.exports = [function() {
             height: 0,
             width: 0,
         };
+
+
+        if(angular.isDefined(options)) {
+            if(angular.isDefined(options.bounds))
+                angular.extend(this.bounds, options.bounds);
+            if(angular.isDefined(options.offsets))
+                angular.extend(this.render.offsets, options.offsets);
+
+            // if we have supplied some values, then we need to update the render values
+            this.update();
+        }
     };
 
     Base.prototype.update = function() {

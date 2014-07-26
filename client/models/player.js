@@ -1,14 +1,18 @@
 module.exports = [
 'angular', 'object.base',
 function(angular, Base) {
-    var model = new Base();
-
-    model.bounds.x = 10;
-    model.bounds.y = 10;
-    model.bounds.height = 50;
-    model.bounds.width = 50;
-
-    model.update();
+    var model = new Base({
+        bounds: {
+            x: 30,
+            y: 20,
+            height: 10,
+            width: 10,
+        },
+        offsets: {
+            y: -10,
+            height: 10,
+        }
+    });
 
     return model;
 }];
