@@ -17,6 +17,7 @@ var app = angular.module('chasingshadows', []);
 app.value('angular', angular);
 app.value('audioContext', audio);
 app.value('socket', socket);
+app.value('config', config);
 
 app.factory('object.class.base', require('./models/class/base'));
 app.factory('object.class.player', require('./models/class/player'));

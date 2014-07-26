@@ -1,8 +1,8 @@
-img.babyboy {
+.babyboy {
     width: 60px;
     height: 60px;
 }
-img.babyboy-walk-down-0 {
-    background: url(babyboy_walkcyclebase.png) 4px -3px no-repeat;
+.babyboy-walk-down-0 {
+    background: url(babyboy_walkcyclebase.png) 6px -3px no-repeat;
     background-size: 500%;
 }

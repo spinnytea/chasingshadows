@@ -2,6 +2,10 @@
 .dummy-object {
     background-color: #CCCCFF;
 }
+.bounding-box {
+    border: 1px solid #8888CC;
+    background: rgba(204, 204, 255, 0.5);
+}
 
 /* basic styling to the map we run around on */
 /* sizes are configured by the map controller */

@@ -12,12 +12,20 @@
 <div class="map-box" data-ng-controller="mapController"
      style="width:{{visibleMap.width}}px;height:{{visibleMap.height}}px;">
 
-    <div class="dummy-object" style="position:absolute;
+    <div class="{{player.sprite.sheet}} {{player.sprite.sheet}}-{{player.sprite.action}}-{{player.sprite.dir}}-{{player.sprite.frame}}"
+         style="position:absolute;
             left:{{player.render.x}}px;
             top:{{player.render.y}}px;
             width:{{player.render.width}}px;
-            height:{{player.render.height}}px;">
+            height:{{player.render.height}}px;"
+            >
     </div>
+
+    <div class="bounding-box" data-ng-if="show_bounds" style="position:absolute;
+            left:{{player.bounds.x}}px;
+            top:{{player.bounds.y}}px;
+            width:{{player.bounds.width}}px;
+            height:{{player.bounds.height}}px;"></div>
 
 </div>
 
