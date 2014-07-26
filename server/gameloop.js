@@ -1,9 +1,13 @@
 var _ = require('lodash');
 
-var updateId = null;
-
+/* this is a list of all the players */
 var players = {};
 
+/* this is a list of all the changes that need to be pushed to the player */
+var updates = {};
+function getUpdates(id) { return (updates[id] = updates[id] || {}); };
+
+/* this is the player class */
 var singlePlayer = {
   bounds: {
     x: 150,
@@ -20,6 +24,8 @@ var singlePlayer = {
 var io;
 
 function update() {
+  updates = {};
+
   _.forOwn(players, function(player, id) {
     if(player.doLeft)
       player.bounds.x -= player.speed;
@@ -31,13 +37,16 @@ function update() {
       player.bounds.y += player.speed;
 
     if(player.doLeft || player.doUp || player.doRight || player.doDown) {
+      _.merge(getUpdates(id), player.bounds);
       io.sockets.emit('player-update', player.bounds);
     }
   });
 
 
+  if(_.keys(updates).length > 0)
+    io.sockets.emit('update-objects', updates);
 
-  updateId = setTimeout(function() { update(); }, 200);
+  setTimeout(function() { update(); }, 200);
 }
 
 function registerClient(socket) {
