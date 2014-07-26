@@ -1,22 +1,14 @@
 module.exports = [
 'angular', 'object.base',
-function(angular, base) {
-    var model = angular.deepExtend({}, base, {
-        bounds: {
-            x: 10,
-            y: 20,
-            width: 50,
-            height: 50,
-        },
-        render: {
-            offsets: {
-                y: -10,
-                height: 10,
-            }
-        }
-    });
+function(angular, Base) {
+    var model = new Base();
 
-    model.render.calc(model);
+    model.bounds.x = 10;
+    model.bounds.y = 10;
+    model.bounds.height = 50;
+    model.bounds.width = 50;
+
+    model.update();
 
     return model;
 }];

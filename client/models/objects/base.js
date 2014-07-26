@@ -1,10 +1,10 @@
 /* this is the base definition of an object for our game */
 module.exports = [function() {
-    var model = {
+    var Base = function() {
 
         // the bounds will be managed by the server
         // we will need to send and receive changes to the player's location
-        bounds: {
+        this.bounds = {
             // these values tell us where the object is located
             x: 0,
             y: 0,
@@ -13,10 +13,10 @@ module.exports = [function() {
             // these probably won't change much during the game
             width: 0,
             height: 0,
-        },
+        };
 
         // render is local data that we need to put the player on the map
-        render: {
+        this.render = {
             // these are the offsets from the bounding box
             // they are static and probably based on the images
             offsets: {
@@ -31,14 +31,15 @@ module.exports = [function() {
             y: 0,
             height: 0,
             width: 0,
-            // and this function does that recomputing
-            calc: function(model) {
-                model.render.x = model.bounds.x + model.render.offsets.x;
-                model.render.y = model.bounds.y + model.render.offsets.y;
-                model.render.width = model.bounds.width + model.render.offsets.width;
-                model.render.height = model.bounds.height + model.render.offsets.height;
-            },
-        },
+        };
     };
-    return model;
+
+    Base.prototype.update = function() {
+        this.render.x = this.bounds.x + this.render.offsets.x;
+        this.render.y = this.bounds.y + this.render.offsets.y;
+        this.render.width = this.bounds.width + this.render.offsets.width;
+        this.render.height = this.bounds.height + this.render.offsets.height;
+    };
+
+    return Base;
 }];
