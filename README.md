@@ -14,8 +14,6 @@ Play coop to solve puzzles!
 * for now, just follow the "player" (we'll add this as another task to do when we make the player un-special)
 
 ## game objects
-* game loop manage game objects
-* player should be a generic object
 * test with two players
 * make some dummy objects when the game starts
 
@@ -30,4 +28,4 @@ Play coop to solve puzzles!
 
 ## cleanup
 * player sprite - stop the moon walking
-
+* doesn't keep track of player when you switch tabs
