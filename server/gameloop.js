@@ -3,6 +3,22 @@ var _ = require('lodash');
 
 /* this is a list of all the players */
 var players = {};
+var walls = {};
+//var enemies = {};
+
+// create a dummy wall
+walls.first = {
+  x: 10,
+  y: 10,
+  width: 20,
+  height: 20
+};
+walls.second = {
+  x: 300,
+  y: 300,
+  width: 50,
+  height: 50
+};
 
 /* this is a list of all the changes that need to be pushed to the player */
 var updates = {};
@@ -66,6 +82,8 @@ function registerClient(socket) {
     if(data.which === 'down')
       players[id].doDown = (data.action === 'start');
   });
+
+  socket.emit('objects-register', walls);
 
   socket.on('disconnect', function() {
     delete players[id];

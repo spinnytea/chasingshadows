@@ -1,10 +1,11 @@
 'use strict';
 
 module.exports = [
-'$scope', 'angular', '$timeout', 'audioContext', 'socket', 'config', 'object.player',
-function ($scope, angular, $timeout, audio, socket, config, player) {
+'$scope', 'angular', '$timeout', 'audioContext', 'socket', 'config', 'object.player', 'gameObjects',
+function ($scope, angular, $timeout, audio, socket, config, player, gameObjects) {
   $scope.player = player;
   $scope.show_bounds = config.show_bounding_box;
+  $scope.objects = gameObjects.objects;
 
   socket.on('player-update', function(data) {
     angular.extend($scope.player.bounds, data);

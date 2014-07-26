@@ -26,6 +26,10 @@ Play coop to solve puzzles!
 * bound the player to the map
 * make an enemy
 
+## attacks
+* projectile
+* bear attack
+
 ## cleanup
 * player sprite - stop the moon walking
 
