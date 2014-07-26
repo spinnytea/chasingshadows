@@ -10,7 +10,7 @@ function($scope, $timeout, audio, socket, config, player) {
             spriteCycle();
         }, 200)
     }
-//    spriteCycle();
+    spriteCycle();
 
     var paused = false;
     function togglePause() {
@@ -68,13 +68,6 @@ function($scope, $timeout, audio, socket, config, player) {
                 break;
             case 80:
                 togglePause();
-                break;
-            case 9: // tab
-                player.sprite.nextFrame();
-//                if(player.sprite.dir == "right")
-//                    player.sprite.dir = "down"
-//                else
-//                    player.sprite.dir = "right"
                 break;
             default:
                 console.log(event.keyCode);
