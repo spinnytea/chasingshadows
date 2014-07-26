@@ -1,3 +1,5 @@
+'use strict';
+
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 var bgmusic = new Audio();

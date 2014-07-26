@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = [ 'angular', function(angular) {
 
   var player1, player2;

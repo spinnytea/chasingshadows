@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = [
 "$scope", "$timeout", "audioContext", "socket", "config", "object.player",
 function($scope, $timeout, audio, socket, config, player) {

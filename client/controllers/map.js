@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = [
 "$scope", "gameObjects",
 function($scope, gameObjects) {
