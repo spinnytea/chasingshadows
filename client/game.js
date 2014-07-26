@@ -1,6 +1,6 @@
 var _ = require('lodash');
 var angular = require('angular');
-var config = require('../server/config');
+var config = require('./config');
 var socket = require('socket.io-client')('http://localhost:'+config.port);
 var audio = require('./audio');
 
