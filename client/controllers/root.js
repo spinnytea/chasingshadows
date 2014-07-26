@@ -1,6 +1,6 @@
 module.exports = [
-"$scope", "audioContext",
-function($scope, audio) {
+"$scope", "audioContext", "socket",
+function($scope, audio, socket) {
 
     var paused = false;
     function togglePause() {
@@ -31,15 +31,23 @@ function($scope, audio) {
         // 37,   38, 38,    40,   80
         switch(event.keyCode) {
             case 37:
+                if($scope.keys.left == false)
+                    socket.emit("player-action", { action: 'start', which: 'left' });
                 $scope.keys.left = true;
                 break;
             case 38:
+                if($scope.keys.up == false)
+                    socket.emit("player-action", { action: 'start', which: 'up' });
                 $scope.keys.up = true;
                 break;
             case 39:
+                if($scope.keys.right == false)
+                    socket.emit("player-action", { action: 'start', which: 'right' });
                 $scope.keys.right = true;
                 break;
             case 40:
+                if($scope.keys.down == false)
+                    socket.emit("player-action", { action: 'start', which: 'down' });
                 $scope.keys.down = true;
                 break;
             case 80:
@@ -48,27 +56,27 @@ function($scope, audio) {
             default:
                 console.log(event.keyCode);
         }
-
-        // TODO send updates to server
     }
     $scope.onKeyUp = function(event) {
         event.preventDefault();
 
         switch(event.keyCode) {
             case 37:
+                socket.emit("player-action", { action: 'end', which: 'left' });
                 $scope.keys.left = false;
                 break;
             case 38:
+                socket.emit("player-action", { action: 'end', which: 'up' });
                 $scope.keys.up = false;
                 break;
             case 39:
+                socket.emit("player-action", { action: 'end', which: 'right' });
                 $scope.keys.right = false;
                 break;
             case 40:
+                socket.emit("player-action", { action: 'end', which: 'down' });
                 $scope.keys.down = false;
                 break;
         }
-
-        // TODO send updates to server
     }
 }];
