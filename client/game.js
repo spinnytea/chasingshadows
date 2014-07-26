@@ -1,5 +1,5 @@
 'use strict';
-var _ = require('lodash');
+//var _ = require('lodash');
 var angular = require('angular');
 var config = require('./config');
 var socket = require('socket.io-client')('http://localhost:'+config.port);
@@ -11,7 +11,6 @@ if(config.audio_pause)
 socket.on('connect', function() {
   console.log('connected');
 });
-
 
 var app = angular.module('chasingshadows', []);
 
@@ -31,5 +30,5 @@ app.factory('gameObjects', require('./models/gameObjects'));
 
 app.factory('object.player', require('./models/objects/player'));
 
-app.controller('rootController', require("./controllers/root"));
-app.controller('mapController', require("./controllers/map"));
+app.controller('rootController', require('./controllers/root'));
+app.controller('mapController', require('./controllers/map'));

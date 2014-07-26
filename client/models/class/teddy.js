@@ -14,7 +14,7 @@ function(Player) {
 
   Teddy.prototype.attack = function() {
 
-  }
+  };
 
   return Teddy;
 }];

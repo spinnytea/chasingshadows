@@ -6,6 +6,7 @@ var nodemon = require('gulp-nodemon');
 var browserSync = require('browser-sync');
 var karma = require('gulp-karma');
 var mocha = require('gulp-mocha');
+var jshint = require('gulp-jshint');
 
 var config = require('./server/config');
 
@@ -25,7 +26,16 @@ if(exports) {
   exports.server_tests = server_tests;
 }
 
-gulp.task('js', function () {
+gulp.task('jshint', function () {
+  return gulp.src([
+    'client/**/*.js',
+    'server/**/*.js'
+  ]).pipe(jshint())
+    .pipe(jshint.reporter('jshint-stylish'))
+    .pipe(jshint.reporter('fail'));
+});
+
+gulp.task('js', ['jshint'], function () {
   return gulp.src('client/game.js')
   .pipe(browserify({
     debug: true
@@ -47,8 +57,13 @@ gulp.task('index', ['js'], function () {
   .pipe(browserSync.reload({stream:true, once: true}));
 });
 
+gulp.task('reload', ['jshint'], function () {
+  return gulp.src('')
+    .pipe(browserSync.reload({stream:true, once: true}));
+});
+
 gulp.task('watch', function () {
-  // Re-run browserify if any client javascript is changed
+  // Re-run browserify and jshint if any client javascript is changed
   gulp.watch('client/**/*.js', ['js']);
   
   // Re-build the index page when its edited or the css is changed
@@ -57,12 +72,12 @@ gulp.task('watch', function () {
   
   // Trigger reload when the server restarts
   gulp.watch('.server.stamp', function () {
-    browserSync.reload();
+    gulp.start(['reload']);
   });
 });
 
 var browser_running = false;
-gulp.task('run', ['index', 'watch'], function () {
+gulp.task('run', ['watch', 'index'], function () {
   nodemon({
     script: 'server/index.js',
     watch: ['server']

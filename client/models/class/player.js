@@ -15,11 +15,11 @@ function(Base) {
   Player.prototype.interact = function(){
     // interact with nearby object
     // hugging
-  }
+  };
 
   Player.prototype.attack = function() {
 
-  }
+  };
 
   return Player;
 }];

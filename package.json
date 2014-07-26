@@ -34,7 +34,10 @@
     "gulp-mocha": "~0.5.2",
     "should": "~4.0.4",
     "angular-mocks": "~1.2.19",
-    "gulp-nodemon": "~1.0.4"
+    "gulp-nodemon": "~1.0.4",
+    "gulp-jshint": "~1.8.0",
+    "jshint": "~2.5.2",
+    "jshint-stylish": "~0.4.0"
   },
   "dependencies": {
     "angular": "~1.2.19",

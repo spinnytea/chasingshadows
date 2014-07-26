@@ -14,7 +14,7 @@ function(Player) {
 
   Mage.prototype.attack = function() {
 
-  }
+  };
 
   return Mage;
 }];

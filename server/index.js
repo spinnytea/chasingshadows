@@ -1,5 +1,5 @@
 'use strict';
-var _ = require('lodash');
+//var _ = require('lodash');
 var touch = require('touch');
 var express = require('express');
 var config  = require('./config');
@@ -14,7 +14,7 @@ var server = app.listen(config.port, function() {
 });
 
 socketio(server).on('connection', function(socket) {
-  console.log("a user has connected");
+  console.log('a user has connected');
   socket.on('player-action', function(data) {
     console.log(data);
   });
