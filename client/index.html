@@ -8,8 +8,18 @@
 <body>
 <!-- inject:js -->
 <!-- endinject -->
-<div data-ng-controller="mapController">
-    {{pm.x}}
+
+<div class="map-box" data-ng-controller="mapController"
+     style="width:{{visibleMap.width}}px;height:{{visibleMap.height}}px;">
+
+    <div class="dummy-object" style="position:absolute;
+            left:{{player.x}}px;
+            top:{{player.y}}px;
+            width:{{player.width}}px;
+            height:{{player.height}}px;">
+    </div>
+
 </div>
+
 </body>
 </html>
