@@ -1,7 +1,7 @@
 module.exports = [
-"$scope", "playerModel", "gameObjects",
-function($scope, playerModel, gameObjects) {
-    $scope.player = playerModel;
+"$scope", "object.player", "gameObjects",
+function($scope, player, gameObjects) {
+    $scope.player = player;
     $scope.objects = gameObjects.objects;
 
     $scope.visibleMap = {

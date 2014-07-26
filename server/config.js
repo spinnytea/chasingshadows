@@ -1,3 +1,4 @@
-module.exports = {
-    port: 3030
-};
+var _ = require('lodash');
+
+module.exports = _.assign(_.cloneDeep(require('../config')), {
+});

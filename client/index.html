@@ -5,7 +5,7 @@
     <!-- inject:css -->
     <!-- endinject -->
 </head>
-<body>
+<body data-ng-controller="rootController" data-ng-keydown="onKeyDown($event)" data-ng-keyup="onKeyUp($event)">
 <!-- inject:js -->
 <!-- endinject -->
 
@@ -13,12 +13,25 @@
      style="width:{{visibleMap.width}}px;height:{{visibleMap.height}}px;">
 
     <div class="dummy-object" style="position:absolute;
-            left:{{player.x}}px;
-            top:{{player.y}}px;
-            width:{{player.width}}px;
-            height:{{player.height}}px;">
+            left:{{player.render.x}}px;
+            top:{{player.render.y}}px;
+            width:{{player.render.width}}px;
+            height:{{player.render.height}}px;">
     </div>
 
+</div>
+
+<div class="hud">
+    <table class="keys-table">
+        <tr>
+            <th>Keys</th>
+        </tr>
+        <tr data-ng-repeat="(name, pressed) in keys" data-ng-class="{'active': pressed}">
+            <td>{{name}}</td>
+        </tr>
+    </table>
+
+    <div data-ng-class="{'active': isPaused()}">paused: {{isPaused()}}</div>
 </div>
 
 </body>

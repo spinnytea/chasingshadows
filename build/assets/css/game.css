@@ -1,0 +1,26 @@
+/* this is a class you can stick on an object when you don't know what to do with it */
+.dummy-object {
+    background-color: #CCCCFF;
+}
+
+/* basic styling to the map we run around on */
+/* sizes are configured by the map controller */
+.map-box {
+    border: 1px solid black;
+    overflow: hidden;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+}
+
+.active {
+    background-color: #CCCCFF;
+}
+
+/* this is just temporary for now */
+.hud {
+    position: fixed;
+    top: 10px;
+    left: 520px; /* if this is to the right of the name, then it should be calculated elsewhere */
+    right: 10px;
+}
