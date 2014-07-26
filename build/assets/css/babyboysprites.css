@@ -1,8 +1,23 @@
-img.babyboy {
+.babyboy {
     width: 60px;
     height: 60px;
-}
-img.babyboy-walk-down-0 {
-    background: url(babyboy_walkcyclebase.png) 4px -3px no-repeat;
+    background-image: url(babyboy_walkcyclebase.png);
+    background-repeat: no-repeat;
     background-size: 500%;
 }
+
+.babyboy-walk-down-0 { background-position:    5px    -3px; }
+.babyboy-walk-down-1 { background-position:  -52px    -2px; }
+.babyboy-walk-down-2 { background-position: -111px    -3px; }
+
+.babyboy-walk-right-0 { background-position:    5px  -58px; }
+.babyboy-walk-right-1 { background-position:  -53px  -57px; }
+.babyboy-walk-right-2 { background-position: -111px  -56px; }
+
+.babyboy-walk-left-0 { background-position:    6px -110px; }
+.babyboy-walk-left-1 { background-position:  -52px -111px; }
+.babyboy-walk-left-2 { background-position: -110px -111px; }
+
+.babyboy-walk-up-0 { background-position:    4px -170px; }
+.babyboy-walk-up-1 { background-position:  -53px -170px; }
+.babyboy-walk-up-2 { background-position: -112px -170px; }

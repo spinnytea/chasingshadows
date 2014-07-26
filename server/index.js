@@ -14,7 +14,7 @@ var server = app.listen(config.port, function() {
 
 socketio(server).on('connection', function(socket) {
     console.log("a user has connected");
-    socket.on('player-action', function(data){
+    socket.on('player-action', function(data) {
         console.log(data);
     });
     socket.on('disconnect', function() {});
