@@ -1,3 +1,4 @@
+'use strict';
 var _ = require('lodash');
 
 /* this is a list of all the players */
@@ -5,7 +6,7 @@ var players = {};
 
 /* this is a list of all the changes that need to be pushed to the player */
 var updates = {};
-function getUpdates(id) { return (updates[id] = updates[id] || {}); };
+function getUpdates(id) { return (updates[id] = updates[id] || {}); }
 
 /* this is the player class */
 var singlePlayer = {
@@ -13,7 +14,7 @@ var singlePlayer = {
     x: 150,
     y: 150,
     width: 30,
-    height: 35,
+    height: 35
   },
   speed: 10,
   doLeft: false,
@@ -68,10 +69,10 @@ function registerClient(socket) {
 
   socket.on('disconnect', function() {
     delete players[id];
-    console.log("number of players: " + Object.keys(players).length);
+    console.log('number of players: ' + Object.keys(players).length);
   });
 
-  console.log("number of players: " + Object.keys(players).length);
+  console.log('number of players: ' + Object.keys(players).length);
 }
 
 module.exports = {

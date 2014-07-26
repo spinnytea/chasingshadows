@@ -1,8 +1,8 @@
 'use strict';
 
 module.exports = [
-'$scope', '$timeout', 'audioContext', 'socket', 'config', 'object.player',
-function ($scope, $timeout, audio, socket, config, player) {
+'$scope', 'angular', '$timeout', 'audioContext', 'socket', 'config', 'object.player',
+function ($scope, angular, $timeout, audio, socket, config, player) {
   $scope.player = player;
   $scope.show_bounds = config.show_bounding_box;
 
@@ -53,25 +53,25 @@ function ($scope, $timeout, audio, socket, config, player) {
     // 37,   38, 38,    40,   80
     switch(event.keyCode) {
       case 37:
-        if ($scope.keys.left == false)
+        if ($scope.keys.left === false)
           socket.emit('player-action', { action: 'start', which: 'left' });
         $scope.keys.left = true;
         player.sprite.dir = 'left';
         break;
       case 38:
-        if ($scope.keys.up == false)
+        if ($scope.keys.up === false)
           socket.emit('player-action', { action: 'start', which: 'up' });
         $scope.keys.up = true;
         player.sprite.dir = 'up';
         break;
       case 39:
-        if ($scope.keys.right == false)
+        if ($scope.keys.right === false)
           socket.emit('player-action', { action: 'start', which: 'right' });
         $scope.keys.right = true;
         player.sprite.dir = 'right';
         break;
       case 40:
-        if ($scope.keys.down == false)
+        if ($scope.keys.down === false)
           socket.emit('player-action', { action: 'start', which: 'down' });
         $scope.keys.down = true;
         player.sprite.dir = 'down';
@@ -82,7 +82,7 @@ function ($scope, $timeout, audio, socket, config, player) {
       default:
         console.log(event.keyCode);
     }
-  }
+  };
   $scope.onKeyUp = function(event) {
     event.preventDefault();
 
@@ -104,5 +104,5 @@ function ($scope, $timeout, audio, socket, config, player) {
         $scope.keys.down = false;
         break;
     }
-  }
+  };
 }];
