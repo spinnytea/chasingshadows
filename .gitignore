@@ -1,5 +1,11 @@
 /node_modules
 /game/index.html
 /game/game.js
+
+# Ignore intellij files
 /.idea
 /*.iml
+
+# Ignore eclipse files
+/.settings
+/.project
