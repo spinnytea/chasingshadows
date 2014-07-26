@@ -1,8 +1,8 @@
 'use strict';
 
 module.exports = [
-'$scope', 'angular', '$timeout', 'audioContext', 'socket', 'config', 'object.player', 'gameObjects',
-function ($scope, angular, $timeout, audio, socket, config, player, gameObjects) {
+'$scope', 'angular', 'audioContext', 'socket', 'config', 'object.player', 'gameObjects',
+function ($scope, angular, audio, socket, config, player, gameObjects) {
   $scope.player = player;
   $scope.show_bounds = config.show_bounding_box;
   $scope.objects = gameObjects.objects;
@@ -11,15 +11,6 @@ function ($scope, angular, $timeout, audio, socket, config, player, gameObjects)
     angular.extend($scope.player.bounds, data);
     $scope.player.update();
   });
-
-  function spriteCycle () {
-    $timeout(function() {
-      player.sprite.nextFrame();
-      spriteCycle();
-    }, 200);
-  }
-
-  spriteCycle();
 
   var paused = false;
 

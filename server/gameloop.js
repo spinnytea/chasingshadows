@@ -36,6 +36,7 @@ var singlePlayer = {
     width: 30,
     height: 35
   },
+  sprite: { sheet: 'babyboy' },
   speed: 10,
   doLeft: false,
   doUp: false,
@@ -48,14 +49,22 @@ function update() {
   updates = {};
 
   _.forOwn(players, function(player, id) {
-    if(player.doLeft)
+    if(player.doLeft) {
       player.bounds.x -= player.speed;
-    if(player.doUp)
+      player.sprite.dir = 'left';
+    }
+    if(player.doUp) {
       player.bounds.y -= player.speed;
-    if(player.doRight)
+      player.sprite.dir = 'up';
+    }
+    if(player.doRight) {
       player.bounds.x += player.speed;
-    if(player.doDown)
+      player.sprite.dir = 'right';
+    }
+    if(player.doDown) {
       player.bounds.y += player.speed;
+      player.sprite.dir = 'down';
+    }
 
     if(player.doLeft || player.doUp || player.doRight || player.doDown) {
       _.merge(getUpdates(id), player);

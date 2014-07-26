@@ -17,17 +17,10 @@ function(Base) {
       width: 30
     }
   });
-  model.sprite = {
-    sheet: 'babyboy',
-    action: 'walk',
-    dir: 'down',
-    frame: 0,
-
-    nextFrame: function() {
-      model.sprite.frame++;
-      if(model.sprite.frame > 2)
-        model.sprite.frame = 0;
-    }
+  model.sprite.nextFrame = function() {
+    model.sprite.frame++;
+    if(model.sprite.frame > 2)
+      model.sprite.frame = 0;
   };
 
   return model;

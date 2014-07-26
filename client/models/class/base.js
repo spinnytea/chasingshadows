@@ -2,12 +2,9 @@
 
 /* this is the base definition of an object for our game */
 module.exports = [
-'angular',
-function (angular) {
-  /**
-   * @param options: you can supply render offsets (options.offsets) and initial bounds (options.bounds)
-   */
-  var Base = function (options) {
+function () {
+  var Base = function () {
+    var that = this;
 
     // the bounds will be managed by the server
     // we will need to send and receive changes to the player's location
@@ -40,16 +37,19 @@ function (angular) {
       width:   0
     };
 
-    // now we update our default values based on the options we supplied
-    if (angular.isDefined(options)) {
-      if (angular.isDefined(options.bounds))
-        angular.extend(this.bounds, options.bounds);
-      if (angular.isDefined(options.offsets))
-        angular.extend(this.render.offsets, options.offsets);
-
-      // if we have supplied some values, then we need to update the render values
-      this.update();
-    }
+    // TODO is there a better base sprite?
+    this.sprite = {
+      sheet:  undefined,
+      action: undefined,
+      dir:    undefined,
+      frame:  0,
+      max_frame: 0,
+      nextFrame: function() {
+        that.sprite.frame++;
+        if(that.sprite.frame > that.sprite.max_frame)
+          that.sprite.frame = 0;
+      }
+    };
   };
 
   Base.prototype.update = function () {

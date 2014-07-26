@@ -15,8 +15,6 @@ Play coop to solve puzzles!
 
 ## game objects
 * game loop manage game objects
-* client update game objects
-* client create new game updates
 * player should be a generic object
 * test with two players
 * make some dummy objects when the game starts
