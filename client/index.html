@@ -26,10 +26,12 @@
         <tr>
             <th>Keys</th>
         </tr>
-        <tr data-ng-repeat="(name, pressed) in keys" data-ng-class="{'pressed': pressed}">
+        <tr data-ng-repeat="(name, pressed) in keys" data-ng-class="{'active': pressed}">
             <td>{{name}}</td>
         </tr>
     </table>
+
+    <div data-ng-class="{'active': isPaused()}">paused: {{isPaused()}}</div>
 </div>
 
 </body>

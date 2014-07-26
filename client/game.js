@@ -4,6 +4,7 @@ var angular = require('angular');
 var app = angular.module('chasingshadows', []);
 
 app.value('angular', angular);
+app.value('audioContext', require('./audio'));
 app.factory('gameObjects', require('./models/gameObjects'));
 app.factory('object.base', require('./models/objects/base'));
 app.factory('object.player', require('./models/objects/player'));

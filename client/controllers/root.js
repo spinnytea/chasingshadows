@@ -1,6 +1,20 @@
 module.exports = [
-"$scope",
-function($scope) {
+"$scope", "audioContext",
+function($scope, audio) {
+
+    var paused = false;
+    function togglePause() {
+        paused = !paused;
+        if(paused) {
+            audio.bgmusic.pause();
+        } else {
+            audio.bgmusic.play();
+        }
+    }
+    $scope.isPaused = function() {
+        return paused;
+    };
+
     $scope.keys = {
         left: false,
         right: false,
@@ -13,8 +27,8 @@ function($scope) {
     $scope.onKeyDown = function(event) {
         event.preventDefault();
 
-        // left, up, right, down
-        // 37, 38, 38, 40
+        // left, up, right, down, p
+        // 37,   38, 38,    40,   80
         switch(event.keyCode) {
             case 37:
                 $scope.keys.left = true;
@@ -28,6 +42,11 @@ function($scope) {
             case 40:
                 $scope.keys.down = true;
                 break;
+            case 80:
+                togglePause();
+                break;
+            default:
+                console.log(event.keyCode);
         }
 
         // TODO send updates to server

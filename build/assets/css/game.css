@@ -13,8 +13,8 @@
     left: 10px;
 }
 
-.keys-table .pressed {
-    background: #CCCCFF;
+.active {
+    background-color: #CCCCFF;
 }
 
 /* this is just temporary for now */
