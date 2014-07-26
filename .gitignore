@@ -1,6 +1,9 @@
+# NPM modules
 /node_modules
-/game/index.html
-/game/game.js
+
+# Ignore generated files
+/build/index.html
+/build/game.js
 
 # Ignore intellij files
 /.idea

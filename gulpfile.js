@@ -8,19 +8,19 @@ gulp.task('client', function () {
         .pipe(browserify({
             debug: true
         }))
-        .pipe(gulp.dest('game'));
+        .pipe(gulp.dest('build'));
 });
 
 gulp.task('index', ['client'], function () {
     return gulp.src('client/index.html')
         .pipe(inject(gulp.src([
-            'game/**/*.js',
-            'game/**/*.css'
+            'build/**/*.js',
+            'build/**/*.css'
         ], {read: false}), {
-            ignorePath: '../game',
+            ignorePath: '../build',
             relative: true
         }))
-        .pipe(gulp.dest('game'));
+        .pipe(gulp.dest('build'));
 });
 
 gulp.task('run', ['index', 'client'], function () {
