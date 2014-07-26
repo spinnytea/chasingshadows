@@ -4,6 +4,7 @@ var touch = require('touch');
 var express = require('express');
 var config  = require('./config');
 var socketio = require('socket.io');
+var gameloop = require('./gameloop');
 
 var app = express();
 app.use(express.static(__dirname + '/../build'));
@@ -13,10 +14,11 @@ var server = app.listen(config.port, function() {
   touch('.server.stamp');
 });
 
-socketio(server).on('connection', function(socket) {
+var io = socketio(server);
+io.on('connection', function(socket) {
   console.log('a user has connected');
-  socket.on('player-action', function(data) {
-    console.log(data);
-  });
-  socket.on('disconnect', function() {});
+  gameloop.register(socket);
 });
+
+gameloop.io(io);
+gameloop.start();
