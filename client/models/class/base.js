@@ -1,3 +1,5 @@
+'use strict';
+
 /* this is the base definition of an object for our game */
 module.exports = [ 'angular', function(angular) {
   /**

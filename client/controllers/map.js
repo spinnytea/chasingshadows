@@ -1,10 +1,12 @@
+'use strict';
+
 module.exports = [
 "$scope", "gameObjects",
 function($scope, gameObjects) {
-    $scope.objects = gameObjects.objects;
+  $scope.objects = gameObjects.objects;
 
-    $scope.visibleMap = {
-        width: 500,
-        height: 500,
-    };
+  $scope.visibleMap = {
+    width: 500,
+    height: 500,
+  };
 }];

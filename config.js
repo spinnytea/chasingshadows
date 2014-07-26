@@ -1,3 +1,4 @@
+'use strict';
 module.exports = {
-    port: 3030
+  port: 3030
 };

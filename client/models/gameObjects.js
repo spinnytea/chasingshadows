@@ -1,8 +1,10 @@
+'use strict';
+
 module.exports = [
 function() {
-    var instance = {};
+  var instance = {};
 
-    instance.objects = [];
+  instance.objects = [];
 
-    return instance;
+  return instance;
 }];
