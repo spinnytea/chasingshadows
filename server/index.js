@@ -14,11 +14,5 @@ var server = app.listen(config.port, function() {
   touch('.server.stamp');
 });
 
-var io = socketio(server);
-io.on('connection', function(socket) {
-  console.log('a user has connected');
-  gameloop.register(socket);
-});
-
-gameloop.io(io);
+gameloop.io(socketio(server));
 gameloop.start();
