@@ -1,13 +1,28 @@
 var gulp = require('gulp');
 var browserify = require('gulp-browserify');
 var inject = require('gulp-inject');
-var rename = require('gulp-rename');
 var supervisor = require('gulp-supervisor');
 var browserSync = require('browser-sync');
 var karma = require('gulp-karma');
 var mocha = require('gulp-mocha');
 
 var config = require('./server/config');
+
+var client_tests = [
+  'build/game.js',
+  'node_modules/angular-mocks/angular-mocks.js',
+  'test/client/**/*.js'
+];
+
+var server_tests = [
+  'test/server/**/*.js'
+];
+
+// A little workaround to pull this into other configs
+if(exports) {
+  exports.client_tests = client_tests;
+  exports.server_tests = server_tests;
+}
 
 gulp.task('js', function () {
   return gulp.src('client/game.js')
@@ -52,26 +67,20 @@ gulp.task('run', ['index', 'watch'], function () {
   });
   browserSync({
     proxy: 'localhost:' + config.port,
-    online: false,
+    online: false
     //browser: ["google-chrome"]
   });
 });
 
 gulp.task('test-client', ['js'], function () {
-  return gulp.src([
-    'build/game.js',
-    'node_modules/angular-mocks/angular-mocks.js',
-    'test/client/**/*.js'
-  ]).pipe(karma({
+  return gulp.src(client_tests).pipe(karma({
     configFile: 'karma.conf.js',
     action: 'watch'
   }));
 });
 
 gulp.task('test-server', function () {
-  return gulp.src([
-    'test/server/**/*.js'
-  ]).pipe(mocha({
+  return gulp.src(server_tests).pipe(mocha({
     reporter: 'nyan'
   }));
 });

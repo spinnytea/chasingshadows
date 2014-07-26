@@ -2,6 +2,8 @@
 // Generated on Sat Jul 26 2014 04:27:50 GMT-0400 (EDT)
 
 module.exports = function(config) {
+  var gulp_defs = require('./gulpfile');
+
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -14,8 +16,7 @@ module.exports = function(config) {
 
 
     // list of files / patterns to load in the browser
-    files: [
-    ],
+    files: gulp_defs.client_tests,
 
 
     // list of files to exclude
