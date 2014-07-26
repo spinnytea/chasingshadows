@@ -1,0 +1,33 @@
+{
+  "name": "chasingshadows",
+  "version": "0.0.0",
+  "description": "",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cjntaylor/chasingshadows"
+  },
+  "keywords": [
+    "game"
+  ],
+  "contributors": [
+    "Colin Taylor <cjntaylor@gmail.com>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cjntaylor/chasingshadows/issues"
+  },
+  "devDependencies": {
+    "gulp": "~3.8.6",
+    "gulp-browserify": "~0.5.0",
+    "gulp-inject": "~1.0.0",
+    "gulp-rename": "~1.2.0"
+  },
+  "dependencies": {
+    "angular": "~1.2.19",
+    "express": "~4.7.0"
+  }
+}
