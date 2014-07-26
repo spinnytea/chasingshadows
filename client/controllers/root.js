@@ -1,13 +1,18 @@
 'use strict';
 
 module.exports = [
-'$scope', '$timeout', 'audioContext', 'socket', 'config', 'object.player',
-function ($scope, $timeout, audio, socket, config, player) {
+'$scope', 'angular', '$timeout', 'audioContext', 'socket', 'config', 'object.player',
+function ($scope, angular, $timeout, audio, socket, config, player) {
   $scope.player = player;
   $scope.show_bounds = config.show_bounding_box;
 
+  socket.on('player-update', function(data) {
+    angular.extend($scope.player.bounds, data);
+    $scope.player.update();
+  });
+
   function spriteCycle () {
-    $timeout(function () {
+    $timeout(function() {
       player.sprite.nextFrame();
       spriteCycle();
     }, 200);
@@ -41,12 +46,12 @@ function ($scope, $timeout, audio, socket, config, player) {
 
   /* keys are captured in the root panel because we want to them to be app wide */
   /* if we want to add forms to the page, then we will need to move these */
-  $scope.onKeyDown = function (event) {
+  $scope.onKeyDown = function(event) {
     event.preventDefault();
 
     // left, up, right, down, p
     // 37,   38, 38,    40,   80
-    switch (event.keyCode) {
+    switch(event.keyCode) {
       case 37:
         if ($scope.keys.left === false)
           socket.emit('player-action', { action: 'start', which: 'left' });
@@ -78,8 +83,7 @@ function ($scope, $timeout, audio, socket, config, player) {
         console.log(event.keyCode);
     }
   };
-
-  $scope.onKeyUp = function (event) {
+  $scope.onKeyUp = function(event) {
     event.preventDefault();
 
     switch (event.keyCode) {
