@@ -13,13 +13,42 @@ function($scope, playerModel) {
     $scope.onKeyDown = function(event) {
         event.preventDefault();
 
-        playerModel.x += 10;
+        // left, up, right, down
+        // 37, 38, 38, 40
+        switch(event.keyCode) {
+            case 37:
+                $scope.keys.left = true;
+                break;
+            case 38:
+                $scope.keys.up = true;
+                break;
+            case 39:
+                $scope.keys.right = true;
+                break;
+            case 40:
+                $scope.keys.down = true;
+                break;
+        }
 
         // TODO send updates to server
     }
     $scope.onKeyUp = function(event) {
         event.preventDefault();
-        console.log(event);
+
+        switch(event.keyCode) {
+            case 37:
+                $scope.keys.left = false;
+                break;
+            case 38:
+                $scope.keys.up = false;
+                break;
+            case 39:
+                $scope.keys.right = false;
+                break;
+            case 40:
+                $scope.keys.down = false;
+                break;
+        }
 
         // TODO send updates to server
     }
