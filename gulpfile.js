@@ -2,7 +2,7 @@
 var gulp = require('gulp');
 var browserify = require('gulp-browserify');
 var inject = require('gulp-inject');
-var supervisor = require('gulp-supervisor');
+var nodemon = require('gulp-nodemon');
 var browserSync = require('browser-sync');
 var karma = require('gulp-karma');
 var mocha = require('gulp-mocha');
@@ -61,15 +61,20 @@ gulp.task('watch', function () {
   });
 });
 
+var browser_running = false;
 gulp.task('run', ['index', 'watch'], function () {
-  supervisor('server/index.js', {
-    watch: ['server'],
-    quiet: true
-  });
-  browserSync({
-    proxy: 'localhost:' + config.port,
-    online: false
-    //browser: ["google-chrome"]
+  nodemon({
+    script: 'server/index.js',
+    watch: ['server']
+  }).on('start', function () {
+    if(!browser_running) {
+      browser_running = true;
+      browserSync({
+        proxy: 'localhost:' + config.port,
+        online: false
+        //browser: ["google-chrome"]
+      });
+    }
   });
 });
 
