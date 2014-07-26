@@ -2,27 +2,55 @@ var gulp = require('gulp');
 var browserify = require('gulp-browserify');
 var inject = require('gulp-inject');
 var rename = require('gulp-rename');
+var supervisor = require('gulp-supervisor');
+var browserSync = require('browser-sync');
 
-gulp.task('client', function () {
-    return gulp.src('client/game.js')
-        .pipe(browserify({
-            debug: true
-        }))
-        .pipe(gulp.dest('build'));
+var config = require('./server/config');
+
+gulp.task('js', function () {
+  return gulp.src('client/game.js')
+  .pipe(browserify({
+    debug: true
+  }))
+  .pipe(gulp.dest('build'))
+  .pipe(browserSync.reload({stream:true, once: true}));
 });
 
-gulp.task('index', ['client'], function () {
-    return gulp.src('client/index.html')
-        .pipe(inject(gulp.src([
-            'build/**/*.js',
-            'build/**/*.css'
-        ], {read: false}), {
-            ignorePath: '../build',
-            relative: true
-        }))
-        .pipe(gulp.dest('build'));
+gulp.task('index', ['js'], function () {
+  return gulp.src('client/index.html')
+  .pipe(inject(gulp.src([
+    'build/**/*.js',
+    'build/**/*.css'
+    ], {read: false}), {
+    ignorePath: '../build',
+    relative: true
+  }))
+  .pipe(gulp.dest('build'))
+  .pipe(browserSync.reload({stream:true, once: true}));
 });
 
-gulp.task('run', ['index', 'client'], function () {
-    require('./server/index.js');
+gulp.task('watch', function () {
+  // Re-run browserify if any client javascript is changed
+  gulp.watch('client/**/*.js', ['js']);
+  
+  // Re-build the index page when its edited or the css is changed
+  gulp.watch('client/**/*.css', ['index']);
+  gulp.watch('client/index.html', ['index']);
+  
+  // Trigger reload when the server restarts
+  gulp.watch('.server.stamp', function () {
+    browserSync.reload();
+  });
+});
+
+gulp.task('run', ['index', 'watch'], function () {
+  supervisor('server/index.js', {
+    watch: ['server'],
+    quiet: true
+  });
+  browserSync({
+    proxy: 'localhost:' + config.port,
+    online: false,
+    //browser: ["google-chrome"]
+  });
 });
