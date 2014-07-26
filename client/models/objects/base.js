@@ -36,7 +36,7 @@ module.exports = [ 'angular', function(angular) {
             width: 0,
         };
 
-
+        // now we update our default values based on the options we supplied
         if(angular.isDefined(options)) {
             if(angular.isDefined(options.bounds))
                 angular.extend(this.bounds, options.bounds);

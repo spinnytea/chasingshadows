@@ -1,6 +1,6 @@
 module.exports = [
-'angular', 'object.base',
-function(angular, Base) {
+'object.base',
+function(Base) {
     var model = new Base({
         bounds: {
             x: 30,

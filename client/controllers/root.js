@@ -1,6 +1,6 @@
 module.exports = [
-"$scope", "playerModel",
-function($scope, playerModel) {
+"$scope",
+function($scope) {
     $scope.keys = {
         left: false,
         right: false,
