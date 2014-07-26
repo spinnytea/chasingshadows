@@ -28,7 +28,6 @@ app.factory('object.class.mageprojectile', require('./models/class/mageprojectil
 
 app.factory('gameObjects', require('./models/gameObjects'));
 
-app.factory('object.player', require('./models/objects/player'));
 app.factory('sprite.config', function () { return {
   'babyboy': require('./models/sprites/babyboy')
 };});
