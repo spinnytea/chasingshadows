@@ -1,17 +1,10 @@
 'use strict';
 var util = require('util');
+var Base = require('../../baseClass');
 
-module.exports = [
-'object.class.base',
-function(Base) {
+var MageProjectile = module.exports = function() {
+  Base.call(this);
+  this.locked = true;
+};
 
-  function MageProjectile(options) {
-    Base.call(this, options);
-    this.locked = true;
-  }
-
-  util.inherits(MageProjectile, Base);
-
-  return MageProjectile;
-
-}];
+util.inherits(MageProjectile, Base);

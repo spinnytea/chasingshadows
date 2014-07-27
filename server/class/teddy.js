@@ -1,20 +1,14 @@
 'use strict';
 var util = require('util');
+var Player = require('./player');
 
 /* functionality of teddy character */
-module.exports = [ 
-'object.class.player',
-function(Player) {
+var Teddy = module.exports = function() {
+  Player.call(this);
+};
 
-  function Teddy(options) {
-    Player.call(this, options);
-  }
+util.inherits(Teddy, Player);
 
-  util.inherits(Teddy, Player);
+Teddy.prototype.attack = function() {
 
-  Teddy.prototype.attack = function() {
-
-  };
-
-  return Teddy;
-}];
+};

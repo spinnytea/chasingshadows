@@ -4,8 +4,8 @@ var util = require('util');
 var Player = require('./player');
 
 /* functionality of mage character */
-var Mage = module.exports = function(options) {
-  Player.call(this, options);
+var Mage = module.exports = function() {
+  Player.call(this);
   _.merge(this, {
     bounds: {
       x: 150,
