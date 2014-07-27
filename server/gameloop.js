@@ -77,13 +77,10 @@ walls.whosa = {
 /* this is a list of all the changes that need to be pushed to the player */
 var updates = {};
 function getUpdates(id) { return (updates[id] = updates[id] || {}); }
-var uid = 0;
-function getUID() {
-  return uid++;
-}
 
 /* this is the player class */
 var singlePlayer = {
+  active: false,
   bounds: {
     x: 150,
     y: 150,
@@ -97,6 +94,10 @@ var singlePlayer = {
   doRight: false,
   doDown: false
 };
+
+players.teddy = _.cloneDeep(singlePlayer);
+players.mage  = _.cloneDeep(singlePlayer);
+
 var io;
 
 function isCollides(bounds1, bounds2) {
@@ -159,11 +160,13 @@ function update() {
   setTimeout(function() { update(); }, 200);
 }
 
+var active_count = 0;
+
 function registerClient(socket) {
   // TODO use a cookie on the client (in case they get disconnected)
-  var id = getUID();
-
-  players[id] = _.cloneDeep(singlePlayer);
+  var id = _.findKey(players, { active: false });
+  players[id].active = true;
+  active_count++;
 
   socket.on('player-action', function(data) {
     if(data.which === 'left')
@@ -181,12 +184,13 @@ function registerClient(socket) {
   socket.emit('player-id', id);
 
   socket.on('disconnect', function() {
-    delete players[id];
+    players[id].active = false;
+    active_count--;
     io.sockets.emit('objects-remove', id);
-    console.log('number of players: ' + Object.keys(players).length);
+    console.log('number of players: ' + active_count);
   });
 
-  console.log('number of players: ' + Object.keys(players).length);
+  console.log('number of players: ' + active_count);
 }
 
 module.exports = {
