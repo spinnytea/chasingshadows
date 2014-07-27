@@ -35,8 +35,9 @@ Updates are broadcast as partials at the end of the update step.
 2. transition into standing sprite (need sprites)
 3. rename player actions object structure (action/which is confusing)
 4. record elapsed time of button press ~ the server should make partial moves
+5. minimize update object
 
-## improve render
+## improve render on the client
 * client should have an update loop
 * this loop is for RENDERING only
 * objects should move based on current trejectory, to move at a higher frame rate
