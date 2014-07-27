@@ -6,27 +6,81 @@ var players = {};
 var walls = {};
 //var enemies = {};
 
-// create a dummy wall
-walls.first = {
+var map = {
   bounds: {
-    x: 10,
-    y: 10,
+    x: 0,
+    y: 0,
+    width: 1000,
+    height: 1000
+  },
+};
+
+// create a dummy wall
+walls.left = {
+  bounds: {
+    x: map.bounds.x-10,
+    y: map.bounds.y-10,
     width: 20,
+    height: map.bounds.height+20
+  }
+};
+walls.top = {
+  bounds: {
+    x: map.bounds.x-10,
+    y: map.bounds.y-10,
+    width: map.bounds.width+20,
     height: 20
   }
 };
-walls.second = {
+walls.right = {
   bounds: {
-    x: 300,
-    y: 300,
-    width: 50,
-    height: 50
+    x: map.bounds.width-10,
+    y: map.bounds.y-10,
+    width: 20,
+    height: map.bounds.height+20
+  }
+};
+walls.bottom = {
+  bounds: {
+    x: map.bounds.x-10,
+    y: map.bounds.height-10,
+    width: map.bounds.width+20,
+    height: 20
+  }
+};
+// three random walls so we can see what's going on
+walls.batoto = {
+  bounds: {
+    x: 400,
+    y: map.bounds.y-10,
+    width: 200,
+    height: 100
+  }
+};
+walls.pamana = {
+  bounds: {
+    x: map.bounds.x-10,
+    y: 400,
+    width: 100,
+    height: 200
+  }
+};
+walls.whosa = {
+  bounds: {
+    x: 450,
+    y: 450,
+    width: 300,
+    height: 100
   }
 };
 
 /* this is a list of all the changes that need to be pushed to the player */
 var updates = {};
 function getUpdates(id) { return (updates[id] = updates[id] || {}); }
+var uid = 0;
+function getUID() {
+  return uid++;
+}
 
 /* this is the player class */
 var singlePlayer = {
@@ -37,7 +91,7 @@ var singlePlayer = {
     height: 35
   },
   sprite: { sheet: 'babyboy' },
-  speed: 10,
+  speed: 30,
   doLeft: false,
   doUp: false,
   doRight: false,
@@ -81,7 +135,7 @@ function update() {
 
 function registerClient(socket) {
   // TODO use a cookie on the client (in case they get disconnected)
-  var id = socket.id;
+  var id = getUID();
 
   players[id] = _.cloneDeep(singlePlayer);
 
@@ -98,6 +152,7 @@ function registerClient(socket) {
 
   socket.emit('objects-register', players);
   socket.emit('objects-register', walls);
+  socket.emit('player-id', id);
 
   socket.on('disconnect', function() {
     delete players[id];

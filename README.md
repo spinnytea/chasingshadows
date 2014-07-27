@@ -6,23 +6,23 @@ Play coop to solve puzzles!
 
 # TODO
 
-## camera
-* follow a specific object in gameObjects list
-* for now, just follow the "player" (we'll add this as another task to do when we make the player un-special)
-
 ## game objects
 * test with two players
 * make some dummy objects when the game starts
 
 ## enhanced game loop
-* add some walls to run into
-* bound the player to the map
+* add some walls to run into (put these on the edge of the map
 * make an enemy
+* enemies run into player
+* player health
+* transition into "dead" state (need sprites)
 
 ## attacks
 * projectile
 * bear attack
+* enemy
 
 ## cleanup
 * player sprite - stop the moon walking
 * doesn't keep track of player when you switch tabs
+* transition into standing sprite (need sprites)

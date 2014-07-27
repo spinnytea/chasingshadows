@@ -15,8 +15,8 @@
     <div class="{{obj.sprite.sheet}} {{obj.sprite.sheet}}-{{obj.sprite.action}}-{{obj.sprite.dir}}-{{obj.sprite.frame}}"
          data-ng-repeat="obj in objects"
          style="position:absolute;
-            left:{{obj.render.x}}px;
-            top:{{obj.render.y}}px;
+            left:{{obj.render.x-getCameraX()}}px;
+            top:{{obj.render.y-getCameraY()}}px;
             width:{{obj.render.width}}px;
             height:{{obj.render.height}}px;"
             >
@@ -25,11 +25,11 @@
     <div class="bounding-box" data-ng-if="show_bounds"
          data-ng-repeat="obj in objects"
          style="position:absolute;
-            left:{{obj.bounds.x}}px;
-            top:{{obj.bounds.y}}px;
+            left:{{obj.bounds.x-getCameraX()}}px;
+            top:{{obj.bounds.y-getCameraY()}}px;
             width:{{obj.bounds.width}}px;
-            height:{{obj.bounds.height}}px;"></div>
-
+            height:{{obj.bounds.height}}px;">
+    </div>
 </div>
 
 <div class="hud">
