@@ -26,6 +26,8 @@ Updates are broadcast as partials at the end of the update step.
 * enemies damage player (add knock-back)
 * player health
 * transition into "dead" state (need sprites)
+* add an object registry?
+* add unity style "behaviors?"
 
 ## attacks
 * projectile
