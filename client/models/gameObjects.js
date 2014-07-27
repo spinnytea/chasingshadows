@@ -29,8 +29,8 @@ function($timeout, socket, Base, sprite_config) {
     });
   });
 
-  socket.on('objects-remove', function(data) {
-    delete instance.objects[data.id];
+  socket.on('objects-remove', function(id) {
+    delete instance.objects[id];
   });
 
   function spriteCycle () {

@@ -31,12 +31,10 @@ Updates are broadcast as partials at the end of the update step.
 * enemy
 
 ## cleanup
-1. player sprite - stop the moon walking
-2. doesn't keep track of player when you switch tabs
-3. transition into standing sprite (need sprites)
-4. rename player actions object structure (action/which is confusing)
-5. trigger object-remove when player disconnects
-6. record elapsed time of button press ~ the server should make partial moves
+1. doesn't keep track of player when you switch tabs
+2. transition into standing sprite (need sprites)
+3. rename player actions object structure (action/which is confusing)
+4. record elapsed time of button press ~ the server should make partial moves
 
 ## improve render
 * client should have an update loop

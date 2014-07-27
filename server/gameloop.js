@@ -156,6 +156,7 @@ function registerClient(socket) {
 
   socket.on('disconnect', function() {
     delete players[id];
+    io.sockets.emit('objects-remove', id);
     console.log('number of players: ' + Object.keys(players).length);
   });
 
