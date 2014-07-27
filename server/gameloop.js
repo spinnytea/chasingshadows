@@ -99,6 +99,15 @@ var singlePlayer = {
 };
 var io;
 
+function isCollides(bounds1, bounds2) {
+  if(bounds1.x + bounds1.width > bounds2.x &&
+    bounds1.x < bounds2.x + bounds2.width &&
+    bounds1.y + bounds1.height > bounds2.y &&
+    bounds1.y < bounds2.y + bounds2.height)
+    return true;
+  return false;
+}
+
 function update() {
   updates = {};
 
@@ -124,6 +133,13 @@ function update() {
       _.merge(getUpdates(id), player);
       io.sockets.emit('player-update', player.bounds);
     }
+
+    // collide with the walls
+    _.forOwn(walls, function(wall) {
+      if(isCollides(player.bounds, wall.bounds)) {
+        // TODO what do we do when they collide? cancel the action?
+      }
+    });
   });
 
 
