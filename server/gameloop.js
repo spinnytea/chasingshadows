@@ -1,5 +1,6 @@
 'use strict';
 var _ = require('lodash');
+var Mage = require('./class/mage');
 
 /* this is a list of all the players */
 var players = {};
@@ -78,25 +79,8 @@ walls.whosa = {
 var updates = {};
 function getUpdates(id) { return (updates[id] = updates[id] || {}); }
 
-/* this is the player class */
-var singlePlayer = {
-  active: false,
-  bounds: {
-    x: 150,
-    y: 150,
-    width: 30,
-    height: 35
-  },
-  sprite: { sheet: 'babyboy' },
-  speed: 30,
-  doLeft: false,
-  doUp: false,
-  doRight: false,
-  doDown: false
-};
-
-players.teddy = _.cloneDeep(singlePlayer);
-players.mage  = _.cloneDeep(singlePlayer);
+players.teddy = new Mage();
+players.mage  = new Mage();
 
 var io;
 
@@ -165,6 +149,11 @@ var active_count = 0;
 function registerClient(socket) {
   // TODO use a cookie on the client (in case they get disconnected)
   var id = _.findKey(players, { active: false });
+
+  // TODO spectator
+  if(_.isUndefined(id))
+    return;
+
   players[id].active = true;
   active_count++;
 

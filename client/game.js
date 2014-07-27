@@ -18,13 +18,7 @@ app.value('angular', angular);
 app.value('audioContext', audio);
 app.value('socket', socket);
 app.value('config', config);
-
-app.factory('object.class.base', require('./models/class/base'));
-app.factory('object.class.player', require('./models/class/player'));
-app.factory('object.class.mage', require('./models/class/mage'));
-app.factory('object.class.teddy', require('./models/class/teddy'));
-app.factory('object.class.exitdoor', require('./models/class/exitdoor'));
-app.factory('object.class.mageprojectile', require('./models/class/mageprojectile'));
+app.value('object.class.base', require('../baseClass'));
 
 app.factory('gameObjects', require('./models/gameObjects'));
 
