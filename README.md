@@ -4,6 +4,14 @@ It's a game! With babies! And teddies!
 
 Play coop to solve puzzles!
 
+# Theory
+
+The client is i/o.
+The server is the authoritative game state.
+
+Add/Remove objects are broadcast immediately.
+Updates are broadcast as partials at the end of the update step.
+
 # TODO
 
 ## game objects
@@ -23,6 +31,17 @@ Play coop to solve puzzles!
 * enemy
 
 ## cleanup
-* player sprite - stop the moon walking
-* doesn't keep track of player when you switch tabs
-* transition into standing sprite (need sprites)
+1. player sprite - stop the moon walking
+2. doesn't keep track of player when you switch tabs
+3. transition into standing sprite (need sprites)
+4. rename player actions object structure (action/which is confusing)
+5. trigger object-remove when player disconnects
+6. record elapsed time of button press ~ the server should make partial moves
+
+## improve render
+* client should have an update loop
+* this loop is for RENDERING only
+* objects should move based on current trejectory, to move at a higher frame rate
+* the server will send in updates, objects will snap to them directly
+* if the client predicts correctly (normal case), then it won't jitter
+* this will reduce the overall jitter
