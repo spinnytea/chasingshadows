@@ -12,21 +12,24 @@
 <div class="map-box" data-ng-controller="mapController"
      style="width:{{visibleMap.width}}px;height:{{visibleMap.height}}px;">
 
-    <div class="{{player.sprite.sheet}} {{player.sprite.sheet}}-{{player.sprite.action}}-{{player.sprite.dir}}-{{player.sprite.frame}}"
+    <div class="{{obj.sprite.sheet}} {{obj.sprite.sheet}}-{{obj.sprite.action}}-{{obj.sprite.dir}}-{{obj.sprite.frame}}"
+         data-ng-repeat="obj in objects"
          style="position:absolute;
-            left:{{player.render.x}}px;
-            top:{{player.render.y}}px;
-            width:{{player.render.width}}px;
-            height:{{player.render.height}}px;"
+            left:{{obj.render.x-getCameraX()}}px;
+            top:{{obj.render.y-getCameraY()}}px;
+            width:{{obj.render.width}}px;
+            height:{{obj.render.height}}px;"
             >
     </div>
 
-    <div class="bounding-box" data-ng-if="show_bounds" style="position:absolute;
-            left:{{player.bounds.x}}px;
-            top:{{player.bounds.y}}px;
-            width:{{player.bounds.width}}px;
-            height:{{player.bounds.height}}px;"></div>
-
+    <div class="bounding-box" data-ng-if="show_bounds"
+         data-ng-repeat="obj in objects"
+         style="position:absolute;
+            left:{{obj.bounds.x-getCameraX()}}px;
+            top:{{obj.bounds.y-getCameraY()}}px;
+            width:{{obj.bounds.width}}px;
+            height:{{obj.bounds.height}}px;">
+    </div>
 </div>
 
 <div class="hud">

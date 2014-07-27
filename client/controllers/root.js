@@ -1,24 +1,11 @@
 'use strict';
 
 module.exports = [
-'$scope', 'angular', '$timeout', 'audioContext', 'socket', 'config', 'object.player',
-function ($scope, angular, $timeout, audio, socket, config, player) {
-  $scope.player = player;
+'$scope', 'angular', 'audioContext', 'socket', 'config', 'gameObjects',
+function ($scope, angular, audio, socket, config, gameObjects) {
   $scope.show_bounds = config.show_bounding_box;
+  $scope.objects = gameObjects.objects;
 
-  socket.on('player-update', function(data) {
-    angular.extend($scope.player.bounds, data);
-    $scope.player.update();
-  });
-
-  function spriteCycle () {
-    $timeout(function() {
-      player.sprite.nextFrame();
-      spriteCycle();
-    }, 200);
-  }
-
-  spriteCycle();
 
   var paused = false;
 
@@ -34,6 +21,7 @@ function ($scope, angular, $timeout, audio, socket, config, player) {
   $scope.isPaused = function () {
     return paused;
   };
+
 
   $scope.keys = {
     left:   false,
@@ -56,25 +44,21 @@ function ($scope, angular, $timeout, audio, socket, config, player) {
         if ($scope.keys.left === false)
           socket.emit('player-action', { action: 'start', which: 'left' });
         $scope.keys.left = true;
-        player.sprite.dir = 'left';
         break;
       case 38:
         if ($scope.keys.up === false)
           socket.emit('player-action', { action: 'start', which: 'up' });
         $scope.keys.up = true;
-        player.sprite.dir = 'up';
         break;
       case 39:
         if ($scope.keys.right === false)
           socket.emit('player-action', { action: 'start', which: 'right' });
         $scope.keys.right = true;
-        player.sprite.dir = 'right';
         break;
       case 40:
         if ($scope.keys.down === false)
           socket.emit('player-action', { action: 'start', which: 'down' });
         $scope.keys.down = true;
-        player.sprite.dir = 'down';
         break;
       case 80:
         togglePause();
