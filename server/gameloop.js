@@ -99,31 +99,57 @@ var singlePlayer = {
 };
 var io;
 
+function isCollides(bounds1, bounds2) {
+  if(bounds1.x + bounds1.width > bounds2.x &&
+    bounds1.x < bounds2.x + bounds2.width &&
+    bounds1.y + bounds1.height > bounds2.y &&
+    bounds1.y < bounds2.y + bounds2.height)
+    return true;
+  return false;
+}
+
 function update() {
   updates = {};
 
   _.forOwn(players, function(player, id) {
+    var change = {};
+
     if(player.doLeft) {
-      player.bounds.x -= player.speed;
-      player.sprite.dir = 'left';
+      _.merge(change, {
+        bounds: { x: player.bounds.x - player.speed },
+        sprite: { dir: 'left' }
+      });
     }
     if(player.doUp) {
-      player.bounds.y -= player.speed;
-      player.sprite.dir = 'up';
+      _.merge(change, {
+        bounds: { y: player.bounds.y - player.speed },
+        sprite: { dir: 'up' }
+      });
     }
     if(player.doRight) {
-      player.bounds.x += player.speed;
-      player.sprite.dir = 'right';
+      _.merge(change, {
+        bounds: { x: player.bounds.x + player.speed },
+        sprite: { dir: 'right' }
+      });
     }
     if(player.doDown) {
-      player.bounds.y += player.speed;
-      player.sprite.dir = 'down';
+      _.merge(change, {
+        bounds: { y: player.bounds.y + player.speed },
+        sprite: { dir: 'down' }
+      });
     }
 
-    if(player.doLeft || player.doUp || player.doRight || player.doDown) {
-      _.merge(getUpdates(id), player);
-      io.sockets.emit('player-update', player.bounds);
+    if(_.keys(change).length > 0) {
+      _.merge(player, change);
+      _.merge(getUpdates(id), change);
     }
+
+    // collide with the walls
+    _.forOwn(walls, function(wall) {
+      if(isCollides(player.bounds, wall.bounds)) {
+        // TODO what do we do when they collide? cancel the action?
+      }
+    });
   });
 
 
@@ -156,6 +182,7 @@ function registerClient(socket) {
 
   socket.on('disconnect', function() {
     delete players[id];
+    io.sockets.emit('objects-remove', id);
     console.log('number of players: ' + Object.keys(players).length);
   });
 

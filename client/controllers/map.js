@@ -11,6 +11,11 @@ function(angular, $scope, gameObjects, socket) {
 
   socket.on('player-id', function(data) {
     $scope.follow = data;
+    socket.on('disconnect', function() {
+      delete $scope.objects[$scope.follow];
+      delete $scope.follow;
+      console.log('disconnected');
+    });
   });
 
   $scope.getCameraX = function() {
