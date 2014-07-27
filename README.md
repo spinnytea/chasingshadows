@@ -16,26 +16,26 @@ Updates are broadcast as partials at the end of the update step.
 
 ## game objects
 * test with two players
-* make some dummy objects when the game starts
+* make a level, with sprites (need sprites)
 
-## enhanced game loop
-* add some walls to run into (put these on the edge of the map
+## collisions
+* add collisions to walls
+
+## enemies
 * make an enemy
-* enemies run into player
+* enemies damage player (add knock-back)
 * player health
 * transition into "dead" state (need sprites)
 
 ## attacks
 * projectile
 * bear attack
-* enemy
 
 ## cleanup
 1. doesn't keep track of player when you switch tabs
 2. transition into standing sprite (need sprites)
 3. rename player actions object structure (action/which is confusing)
 4. record elapsed time of button press ~ the server should make partial moves
-5. minimize update object
 
 ## improve render on the client
 * client should have an update loop

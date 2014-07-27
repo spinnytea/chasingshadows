@@ -112,26 +112,36 @@ function update() {
   updates = {};
 
   _.forOwn(players, function(player, id) {
+    var change = {};
+
     if(player.doLeft) {
-      player.bounds.x -= player.speed;
-      player.sprite.dir = 'left';
+      _.merge(change, {
+        bounds: { x: player.bounds.x - player.speed },
+        sprite: { dir: 'left' }
+      });
     }
     if(player.doUp) {
-      player.bounds.y -= player.speed;
-      player.sprite.dir = 'up';
+      _.merge(change, {
+        bounds: { y: player.bounds.y - player.speed },
+        sprite: { dir: 'up' }
+      });
     }
     if(player.doRight) {
-      player.bounds.x += player.speed;
-      player.sprite.dir = 'right';
+      _.merge(change, {
+        bounds: { x: player.bounds.x + player.speed },
+        sprite: { dir: 'right' }
+      });
     }
     if(player.doDown) {
-      player.bounds.y += player.speed;
-      player.sprite.dir = 'down';
+      _.merge(change, {
+        bounds: { y: player.bounds.y + player.speed },
+        sprite: { dir: 'down' }
+      });
     }
 
-    if(player.doLeft || player.doUp || player.doRight || player.doDown) {
-      _.merge(getUpdates(id), player);
-      io.sockets.emit('player-update', player.bounds);
+    if(_.keys(change).length > 0) {
+      _.merge(player, change);
+      _.merge(getUpdates(id), change);
     }
 
     // collide with the walls
