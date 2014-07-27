@@ -6,9 +6,6 @@ Play coop to solve puzzles!
 
 # TODO
 
-## sprites
-* configure color sprites
-
 ## camera
 * follow a specific object in gameObjects list
 * for now, just follow the "player" (we'll add this as another task to do when we make the player un-special)
