@@ -12,7 +12,7 @@
 <div class="map-box" data-ng-controller="mapController"
      style="width:{{visibleMap.width}}px;height:{{visibleMap.height}}px;">
 
-    <div class="{{obj.sprite.sheet}} {{obj.sprite.sheet}}-{{obj.sprite.action}}-{{obj.sprite.dir}}-{{obj.sprite.frame}}"
+    <div class="{{obj.sprite.sheet}}-{{obj.sprite.action}} {{obj.sprite.sheet}}-{{obj.sprite.action}}-{{obj.sprite.dir}}-{{obj.sprite.frame}}"
          data-ng-repeat="obj in objects"
          style="position:absolute;
             left:{{obj.render.x-getCameraX()}}px;
